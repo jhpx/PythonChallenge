@@ -7,7 +7,7 @@ PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'map.html'
 
 ciphertext = re.findall(
-    r'<font color="#f000f0">([^<]*)', urllib.urlopen(url).read(), re.DOTALL)[0]
+    r'<font color="#f000f0">(.*?)<', urllib.urlopen(url).read(), re.DOTALL)[0]
 
 
 def decrypter(str):
