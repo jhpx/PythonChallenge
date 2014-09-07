@@ -10,8 +10,7 @@ url = PREFIX + 'peak.html'
 
 src = re.findall(
     r'<peakhell src="(.*?)"/>', urllib.urlopen(url).read(), re.DOTALL)[0]
-peakhell = urllib.urlopen(PREFIX + src)
-banner = pickle.load(peakhell)
+banner = pickle.load(urllib.urlopen(PREFIX + src))
 # pprint.pprint()
 for line in banner:
     print "".join(ch * count for ch, count in line)

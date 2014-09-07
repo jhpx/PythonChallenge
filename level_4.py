@@ -8,7 +8,7 @@ urlbase = PREFIX + 'linkedlist.php'
 nothing = 12345
 
 p = re.compile(r'and the next nothing is ([0-9]+)')
-while(True):
+for i in range(400):
     params = urllib.urlencode({'nothing': nothing})
     text = urllib.urlopen("{}?{}".format(urlbase, params)).read()
     m = p.search(text)
