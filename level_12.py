@@ -1,6 +1,6 @@
 # coding=utf-8
 #!/bin/env python
-# Odd even of an image.
+# Deal cards? Deal evils?
 import urllib
 import re
 from cStringIO import StringIO
