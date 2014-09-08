@@ -6,24 +6,27 @@ import re
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'map.html'
 
-ciphertext = re.findall(
-    r'<font color="#f000f0">(.*?)<', urllib.urlopen(url).read(), re.DOTALL)[0]
+
+def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
+    return re.findall(pattern, urllib.urlopen(url).read(), re.DOTALL)[cnt]
+
+
+def move2(c):
+    if re.match(r'[a-z]', c):
+        return chr(ord('a') + (ord(c) - ord('a') + 2) % 26)
+    else:
+        return c
 
 
 def decrypter(str):
     """just move 2"""
-    plaintext = ''
-    for c in str:
-        if re.match(r'[a-z]', c):
-            plaintext += chr(ord('a') + (ord(c) - ord('a') + 2) % 26)
-        else:
-            plaintext += c
-    return plaintext
+    return "".join(map(move2, str))
 
-hint = decrypter(ciphertext)
-print hint
-
-answer = decrypter('map')
-# ocr
-print PREFIX + answer + '.html'
-# url: http://www.pythonchallenge.com/pc/def/ocr.html
+if __name__ == "__main__":
+    pattern = r'<font color="#f000f0">(.*?)<'
+    ciphertext = catch(url, pattern)
+    print decrypter(ciphertext)
+    answer = decrypter('map')
+    # ocr
+    print PREFIX + answer + '.html'
+    # url: http://www.pythonchallenge.com/pc/def/ocr.html
