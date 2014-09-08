@@ -2,27 +2,16 @@
 #!/bin/env python
 # Connect the dots.
 import re
-import urllib2
+import urllib
 import Image
 import ImageDraw
 
-PREFIX = "http://www.pythonchallenge.com/pc/return/"
+PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'good.html'
-
-username = 'huge'
-password = 'file'
 
 
 def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
-    passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    auth_handler = urllib2.HTTPBasicAuthHandler(passman)
-    auth_handler.add_password(None, url, username, password)
-    opener = urllib2.build_opener(auth_handler)
-
-    urllib2.install_opener(opener)
-    page = urllib2.urlopen(url).read()
-
-    return re.findall(pattern, page, re.DOTALL)[cnt]
+    return re.findall(pattern, urllib.urlopen(url).read(), re.DOTALL)[cnt]
 
 
 def solve(text):

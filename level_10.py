@@ -3,7 +3,7 @@
 # Sequence of number.
 import re
 
-PREFIX = "http://www.pythonchallenge.com/pc/return/"
+PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'bull.html'
 
 
