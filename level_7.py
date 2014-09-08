@@ -3,7 +3,8 @@
 # Message inside image.
 import urllib
 import re
-import Image  # need PIL 1.1.7+
+# never use PIL 1.1.7 but Pillow 2.5+
+from PIL import Image
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'oxygen.png'

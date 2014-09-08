@@ -3,8 +3,9 @@
 # Connect the dots.
 import re
 import urllib
-import Image
-import ImageDraw
+# never use PIL 1.1.7 but Pillow 2.5+
+from PIL import Image
+from PIL import ImageDraw
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'good.html'

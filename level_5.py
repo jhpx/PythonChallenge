@@ -1,6 +1,6 @@
 # coding=utf-8
 #!/bin/env python
-# Peak hell pronouced like 'pickle'.
+# Peak hell pronounced like 'pickle'.
 import urllib
 import re
 import pickle
@@ -20,7 +20,7 @@ def solve(text):
 
 
 if __name__ == "__main__":
-    pattern = r'<peakhell src="(.*?)"/>'pronouced
+    pattern = r'<peakhell src="(.*?)"/>'
     text = catch(url, pattern)
     answer = solve(text)
     # channel

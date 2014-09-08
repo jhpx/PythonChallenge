@@ -3,7 +3,8 @@
 # Odd even of an image.
 import urllib
 import re
-import Image  # need PIL 1.1.7+
+# never use PIL 1.1.7 but Pillow 2.5+
+from PIL import Image
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'cave.jpg'
