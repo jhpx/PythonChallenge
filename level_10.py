@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Sequence of number.
 import re
 
 PREFIX = "http://www.pythonchallenge.com/pc/return/"

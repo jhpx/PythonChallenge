@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Connect the dots.
 import re
 import urllib2
 import Image

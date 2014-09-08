@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Decrypt a string.
 import urllib
 import re
 

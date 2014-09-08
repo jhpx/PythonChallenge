@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Nothing in zipfile.
 import urllib
 import re
 import zipfile

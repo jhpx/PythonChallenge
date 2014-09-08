@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Find readable characters.
 import urllib
 import re
 

@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Regular expression.
 import urllib
 import re
 

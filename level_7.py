@@ -1,5 +1,6 @@
 # coding=utf-8
 #!/bin/env python
+# Message inside image.
 import urllib
 import re
 import Image  # need PIL 1.1.7+
