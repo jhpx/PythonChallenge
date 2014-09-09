@@ -2,7 +2,6 @@
 #!/bin/env python
 # Odd even of an image.
 import urllib
-import re
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
 
