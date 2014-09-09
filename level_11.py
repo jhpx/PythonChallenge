@@ -26,4 +26,4 @@ if __name__ == "__main__":
     answer = solve(text)
     # evil
 
-    # url: http://www.pythonchallenge.com/pc/return/evil.html
+    # url: http://huge:file@www.pythonchallenge.com/pc/return/evil.html

@@ -33,4 +33,4 @@ if __name__ == "__main__":
     answer = solve(text)
     # bull graph
 
-    # url: http://www.pythonchallenge.com/pc/return/bull.html
+    # url: http://huge:file@www.pythonchallenge.com/pc/return/bull.html

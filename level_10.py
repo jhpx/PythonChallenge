@@ -21,4 +21,4 @@ if __name__ == "__main__":
     answer = solve(30)
     # 5808
     print PREFIX + answer + '.html'
-    # url: http://www.pythonchallenge.com/pc/return/5808.html
+    # url: http://huge:file@www.pythonchallenge.com/pc/return/5808.html

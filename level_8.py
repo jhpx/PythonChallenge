@@ -20,6 +20,7 @@ def solve(text):
 
 if __name__ == "__main__":
     text = catch(url)
-    answer = solve(text)
-    print answer
+    un, pw = solve(text)
     # huge, file
+    print "http://{}:{}@".format(un, pw) + PREFIX[7:-4] + 'return/good.html'
+    # url: http://huge:file@www.pythonchallenge.com/pc/return/good.html
