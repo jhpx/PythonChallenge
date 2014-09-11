@@ -15,6 +15,7 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 def solve(text):
     return "".join(re.findall(r'[a-z]+', text))
 
+
 if __name__ == "__main__":
     text = catch(url, cnt=1)
     answer = solve(text)

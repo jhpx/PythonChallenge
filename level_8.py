@@ -20,6 +20,7 @@ def solve(text):
     pw = re.findall(r'pw: \'(.*?)\'', text)[0].decode('string-escape')
     return bz2.decompress(un), bz2.decompress(pw)
 
+
 if __name__ == "__main__":
     text = catch(url)
     un, pw = solve(text)

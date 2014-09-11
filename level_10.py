@@ -17,6 +17,7 @@ def solve(n):
         x = describe(x)
     return str(len(x))
 
+
 if __name__ == "__main__":
     answer = solve(30)
     # 5808

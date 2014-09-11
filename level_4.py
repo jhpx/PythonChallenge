@@ -27,6 +27,7 @@ def solve(url, pattern):
             # print text
             return text
 
+
 if __name__ == "__main__":
     pattern = r'and the next nothing is ([0-9]+)'
     answer = solve(url, pattern)

@@ -18,6 +18,7 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 def solve(text):
     return "".join(re.findall(r'[^A-Z][A-Z]{3}([a-z])[A-Z]{3}[^A-Z]', text))
 
+
 if __name__ == "__main__":
     text = catch(url)
     answer = solve(text)

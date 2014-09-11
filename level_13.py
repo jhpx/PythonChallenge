@@ -10,7 +10,7 @@ url = PREFIX + '../phonebook.php'
 
 def solve(url):
     phonebook = xmlrpclib.ServerProxy(url)
-    return phonebook .phone('Bert')
+    return phonebook.phone('Bert')
 
 
 if __name__ == "__main__":

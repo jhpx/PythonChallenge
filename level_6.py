@@ -35,6 +35,7 @@ def solve(fname, pattern):
                 # print text
                 break
 
+
 if __name__ == "__main__":
     pattern = r'nothing is ([0-9]+)'
     text = catch(url)

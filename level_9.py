@@ -30,6 +30,7 @@ def solve(text):
 
     im.show()
 
+
 if __name__ == "__main__":
     text = catch(url, cnt=1)
     answer = solve(text)

@@ -19,11 +19,11 @@ def solve(fname):
     im = Image.open(fname)
     piv = unknown.load()
     i, j = 0, 0
-    L = 99   # length of sprial edge, decrease by 2 circle by circle
-    N = 0    # count accessed pixels, increase by 4*L circle by circle
+    L = 99  # length of sprial edge, decrease by 2 circle by circle
+    N = 0  # count accessed pixels, increase by 4*L circle by circle
     for k, px in enumerate(im.getdata()):
         piv[i, j] = px
-        if (k - N) // L == 0:   # right
+        if (k - N) // L == 0:  # right
             i += 1
         elif (k - N) // L == 1:  # down
             j += 1

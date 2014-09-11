@@ -25,6 +25,7 @@ def decrypter(str):
     """just move 2"""
     return "".join(map(move2, str))
 
+
 if __name__ == "__main__":
     pattern = r'<font color="#f000f0">(.*?)<'
     ciphertext = catch(url, pattern)
