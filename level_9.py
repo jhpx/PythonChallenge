@@ -1,8 +1,9 @@
 # coding=utf-8
 #!/bin/env python
 # Connect the dots.
-import re
 import urllib
+import contextlib
+import re
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
 from PIL import ImageDraw
@@ -12,7 +13,8 @@ url = PREFIX + 'good.html'
 
 
 def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
-    return re.findall(pattern, urllib.urlopen(url).read(), re.DOTALL)[cnt]
+    with contextlib.closing(urllib.urlopen(url)) as page:
+        return re.findall(pattern, page.read(), re.DOTALL)[cnt]
 
 
 def solve(text):

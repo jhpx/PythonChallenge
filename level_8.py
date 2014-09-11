@@ -2,6 +2,7 @@
 #!/bin/env python
 # Bee is busy.
 import urllib
+import contextlib
 import re
 import bz2
 
@@ -10,7 +11,8 @@ url = PREFIX + 'integrity.html'
 
 
 def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
-    return re.findall(pattern, urllib.urlopen(url).read(), re.DOTALL)[cnt]
+    with contextlib.closing(urllib.urlopen(url)) as page:
+        return re.findall(pattern, page.read(), re.DOTALL)[cnt]
 
 
 def solve(text):

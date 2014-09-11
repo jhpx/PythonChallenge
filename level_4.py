@@ -2,6 +2,7 @@
 #!/bin/env python
 # And the next nothing is ?
 import urllib
+import contextlib
 import re
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
@@ -14,7 +15,9 @@ def solve(url, pattern):
     nothing = NOTHING
     for i in range(400):
         print 'nothing: {}'.format(nothing)
-        text = urllib.urlopen("{}?nothing={}".format(url, nothing)).read()
+        weburl = "{}?nothing={}".format(url, nothing)
+        with contextlib.closing(urllib.urlopen(weburl)) as page:
+            text = page.read()
         m = reo.search(text)
         if m:
             nothing = m.group(1)

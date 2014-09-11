@@ -2,6 +2,7 @@
 #!/bin/env python
 # Jan.26th, 1??6 (Mon)
 import urllib
+import contextlib
 import re
 import calendar
 from datetime import date
@@ -11,7 +12,8 @@ url = PREFIX + 'uzi.html'
 
 
 def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
-    return re.findall(pattern, urllib.urlopen(url).read(), re.DOTALL)[cnt]
+    with contextlib.closing(urllib.urlopen(url)) as page:
+        return re.findall(pattern, page.read(), re.DOTALL)[cnt]
 
 
 def solve():
