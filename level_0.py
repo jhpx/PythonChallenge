@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://www.pythonchallenge.com/pc/def/0.html
 # 2 to 38 = ?
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 

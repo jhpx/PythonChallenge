@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/evil.html
 # Deal cards? Deal evils?
 import urllib
 from cStringIO import StringIO

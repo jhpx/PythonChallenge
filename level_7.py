@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://www.pythonchallenge.com/pc/def/oxygen.html
 # Message inside image.
 import urllib
 import re

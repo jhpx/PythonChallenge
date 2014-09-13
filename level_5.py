@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://www.pythonchallenge.com/pc/def/peak.html
 # Peak hell pronounced like 'pickle'.
 import urllib
 import contextlib

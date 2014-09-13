@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/5808.html
 # Odd even of an image.
 import urllib
 # never use PIL 1.1.7 but Pillow 2.5+

@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://www.pythonchallenge.com/pc/def/ocr.html
 # Find readable characters.
 import urllib
 import re

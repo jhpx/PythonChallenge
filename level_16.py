@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/mozart.html
 # let me get this straight
 import urllib
 from itertools import groupby

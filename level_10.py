@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/bull.html
 # Sequence of number.
 import re
 

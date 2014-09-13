@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/uzi.html
 # Jan.26th, 1??6 (Mon)
 import urllib
 import contextlib

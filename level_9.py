@@ -1,5 +1,6 @@
 #!/bin/env python
 # coding=utf-8
+# http://huge:file@www.pythonchallenge.com/pc/return/good.html
 # Connect the dots.
 import urllib
 import contextlib
