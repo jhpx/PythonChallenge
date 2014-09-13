@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Nothing in zipfile.
 import urllib
 import re
@@ -10,7 +10,7 @@ url = PREFIX + 'channel.zip'
 NOTHING = 90052
 
 
-def catch(url, cnt=0):
+def download(url, cnt=0):
     return urllib.urlretrieve(url)[cnt]
 
 
@@ -38,8 +38,8 @@ def solve(fname, pattern):
 
 if __name__ == "__main__":
     pattern = r'nothing is ([0-9]+)'
-    text = catch(url)
-    answer = solve(text, pattern)
+    fname = download(url)
+    answer = solve(fname, pattern)
     # oxygen
 
-    # url: http://www.pythonchallenge.com/pc/def/oxygen.html
+    # http://www.pythonchallenge.com/pc/def/oxygen.html

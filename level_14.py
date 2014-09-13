@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # 100*100 = (100+99+99+98) + (...
 import urllib
 # never use PIL 1.1.7 but Pillow 2.5+
@@ -10,7 +10,7 @@ PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'wire.png'
 
 
-def catch(url, cnt=0):
+def download(url, cnt=0):
     return urllib.urlretrieve(url)[cnt]
 
 
@@ -39,8 +39,8 @@ def solve(fname):
 
 
 if __name__ == "__main__":
-    text = catch(url)
-    answer = solve(text)
+    fname = download(url)
+    answer = solve(fname)
     # cat
 
-    # url: http://huge:file@www.pythonchallenge.com/pc/return/cat.html
+    # http://huge:file@www.pythonchallenge.com/pc/return/cat.html

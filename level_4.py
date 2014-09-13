@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # And the next nothing is ?
 import urllib
 import contextlib
@@ -33,4 +33,4 @@ if __name__ == "__main__":
     answer = solve(url, pattern)
     # peak.html
     print PREFIX + answer
-    # url: http://www.pythonchallenge.com/pc/def/peak.html
+    # http://www.pythonchallenge.com/pc/def/peak.html

@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Find readable characters.
 import urllib
 import re
@@ -21,4 +21,4 @@ if __name__ == "__main__":
     answer = solve(text)
     # equality
     print PREFIX + answer + '.html'
-    # url: http://www.pythonchallenge.com/pc/def/equality.html
+    # http://www.pythonchallenge.com/pc/def/equality.html

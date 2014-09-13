@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Peak hell pronounced like 'pickle'.
 import urllib
 import contextlib
@@ -27,4 +27,4 @@ if __name__ == "__main__":
     answer = solve(text)
     # channel
 
-    # url: http://www.pythonchallenge.com/pc/def/channel.html
+    # http://www.pythonchallenge.com/pc/def/channel.html

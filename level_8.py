@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Bee is busy.
 import urllib
 import contextlib
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     un, pw = solve(text)
     # huge, file
     print "http://{}:{}@".format(un, pw) + PREFIX[7:-4] + 'return/good.html'
-    # url: http://huge:file@www.pythonchallenge.com/pc/return/good.html
+    # http://huge:file@www.pythonchallenge.com/pc/return/good.html

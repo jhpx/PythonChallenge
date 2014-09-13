@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Regular expression.
 import urllib
 import contextlib
@@ -24,4 +24,4 @@ if __name__ == "__main__":
     answer = solve(text)
     # linkedlist
     print PREFIX + answer + '.php'
-    # url: http://www.pythonchallenge.com/pc/def/linkedlist.php
+    # http://www.pythonchallenge.com/pc/def/linkedlist.php

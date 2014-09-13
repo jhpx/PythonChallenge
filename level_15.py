@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Jan.26th, 1??6 (Mon)
 import urllib
 import contextlib
@@ -37,4 +37,4 @@ if __name__ == "__main__":
     answer = solve()
     # mozart
     print PREFIX + answer + '.html'
-    # url: http://huge:file@www.pythonchallenge.com/pc/return/mozart.html
+    # http://huge:file@www.pythonchallenge.com/pc/return/mozart.html

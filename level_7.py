@@ -1,5 +1,5 @@
-# coding=utf-8
 #!/bin/env python
+# coding=utf-8
 # Message inside image.
 import urllib
 import re
@@ -10,19 +10,18 @@ PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'oxygen.png'
 
 
-def catch(url, cnt=0):
+def download(url, cnt=0):
     return urllib.urlretrieve(url)[cnt]
 
 
 def solve(fname):
     im = Image.open(fname)
     width, height = im.size
-    piv = im.load()
 
     upper = -1
     for j in range(height):
         for i in range(0, width, 7):
-            px = piv[i, j]
+            px = im.getpixel((i, j))
             if px[0] == px[1] == px[2]:
                 continue
             elif i > 0:
@@ -41,8 +40,8 @@ def solve(fname):
 
 
 if __name__ == "__main__":
-    text = catch(url)
-    answer = solve(text)
+    fname = download(url)
+    answer = solve(fname)
     # integrity
     print PREFIX + answer + '.html'
-    # url: http://www.pythonchallenge.com/pc/def/integrity.html
+    # http://www.pythonchallenge.com/pc/def/integrity.html
