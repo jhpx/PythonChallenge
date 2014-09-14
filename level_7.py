@@ -32,12 +32,13 @@ def solve(fname):
                 lower = j + 1
                 right = i
             break
-
     box = (left, upper, right, lower)
-    # print box
+    print "Selecting the message area: " + str(box)
     samplesize = ((right - left + 1) / 7, 1)
     text = im.crop(box).convert('L').resize(samplesize).tostring()
-    return "".join([chr(int(x)) for x in re.findall(r'\d+', text)])
+    hidden = "".join([chr(int(x)) for x in re.findall(r'\d+', text)])
+    print "The hidden message is: {}\n".format(hidden)
+    return hidden
 
 
 if __name__ == "__main__":

@@ -17,9 +17,14 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 
 
 def solve(text):
-    un = re.findall(r'un: \'(.*?)\'', text)[0].decode('string-escape')
-    pw = re.findall(r'pw: \'(.*?)\'', text)[0].decode('string-escape')
-    return bz2.decompress(un), bz2.decompress(pw)
+    un_bz2 = re.findall(r'un: \'(.*?)\'', text)[0].decode('string-escape')
+    pw_bz2 = re.findall(r'pw: \'(.*?)\'', text)[0].decode('string-escape')
+    un = bz2.decompress(un_bz2)
+    pw = bz2.decompress(pw_bz2)
+    print "username: " + un
+    print "password: " + pw
+    print
+    return un, pw
 
 
 if __name__ == "__main__":

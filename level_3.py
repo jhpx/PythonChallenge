@@ -17,7 +17,10 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 
 
 def solve(text):
-    return "".join(re.findall(r'[^A-Z][A-Z]{3}([a-z])[A-Z]{3}[^A-Z]', text))
+    answer = "".join(re.findall(r'[^A-Z][A-Z]{3}([a-z])[A-Z]{3}[^A-Z]', text))
+    print "One small letter, surrounded by EXACTLY three big bodyguards",
+    print " on each of its sides:\n{}\n".format(answer)
+    return answer
 
 
 if __name__ == "__main__":

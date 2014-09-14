@@ -15,22 +15,24 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
         return re.findall(pattern, page.read(), re.DOTALL)[cnt]
 
 
-def move2(c):
-    if re.match(r'[a-z]', c):
-        return chr(ord('a') + (ord(c) - ord('a') + 2) % 26)
-    else:
-        return c
-
-
 def decrypter(str):
-    """just move 2"""
-    return "".join(map(move2, str))
+    """Trim the string and move each alphabetic character by 2."""
+
+    def move2(c):
+        if re.match(r'[a-z]', c):
+            return chr(ord('a') + (ord(c) - ord('a') + 2) % 26)
+        else:
+            return c
+
+    return "".join(map(move2, str.strip()))
 
 
 if __name__ == "__main__":
     pattern = r'<font color="#f000f0">(.*?)<'
     ciphertext = catch(url, pattern)
+    print 'Decrypt the hint:'
     print decrypter(ciphertext)
+    print 'Decrypt the url:'
     answer = decrypter('map')
     # ocr
     print PREFIX + answer + '.html'

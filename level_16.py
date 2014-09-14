@@ -39,6 +39,7 @@ def solve(fname):
     unknown.putdata(data)
     unknown.show()
 
+
 if __name__ == "__main__":
     fname = download(url)
     answer = solve(fname)

@@ -23,13 +23,13 @@ def solve():
         if calendar.isleap(yr) and 0 == date(yr, 1, 26).weekday():
             years.append(str(yr))
     year = years[-2]
-    print year + '/01/27'
+    print 'The given date: ' + year + '/01/27'
     # 1756/01/27
 
     wikiurl = 'http://en.wikipedia.org/wiki/January_27'
     text = catch(wikiurl, '<li><a href="/wiki/' + year + '.*?</a>(.*?)</li>')
     text = re.findall(r'<a.*?>(.+?)</a>', text)[0]
-    print text
+    print "The great man: {}\n".format(text)
     # Wolfgang Amadeus Mozart
     return text.split()[-1].lower()
 

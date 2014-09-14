@@ -18,6 +18,7 @@ def download(url, cnt=0):
 def solve(fname, pattern):
     reo = re.compile(pattern)
     nothing = NOTHING
+    print "Following the nothing chain and picking up the crumbs!"
     with zipfile.ZipFile(fname, 'r') as channel:
         comments = []
         for i in range(1000):
@@ -25,17 +26,13 @@ def solve(fname, pattern):
             text = channel.read(name)
             comments.append(channel.getinfo(name).comment)
             m = reo.search(text)
+            print '{}:{}'.format(i, text)
             if m:
                 nothing = m.group(1)
-                print 'nothing:' + nothing
-            elif text.find('comment') > -1:
-                print "".join(comments)
-                break
             else:
-                # print nothing
-                # print text
                 break
-
+    print "Done\n"
+    print "".join(comments)
 
 if __name__ == "__main__":
     pattern = r'nothing is ([0-9]+)'

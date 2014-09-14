@@ -17,6 +17,7 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 
 
 def solve(text):
+    print "Unpacking the message:"
     banner = pickle.load(urllib.urlopen(PREFIX + text))
     for line in banner:
         print "".join(ch * count for ch, count in line)

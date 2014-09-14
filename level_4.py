@@ -14,19 +14,21 @@ NOTHING = 12345
 def solve(url, pattern):
     reo = re.compile(pattern)
     nothing = NOTHING
+    print "Following the nothing chain!"
     for i in range(400):
-        print 'nothing: {}'.format(nothing)
         weburl = "{}?nothing={}".format(url, nothing)
         with contextlib.closing(urllib.urlopen(weburl)) as page:
             text = page.read()
         m = reo.search(text)
+        print '{}: {}'.format(i, text)
         if m:
             nothing = m.group(1)
-        elif text.find(r'Yes. Divide by two and keep going.') > -1:
+        elif text.find(r'Divide by two') > -1:
             nothing = int(nothing) / 2
         else:
-            # print text
-            return text
+            break
+    print "Done\n"
+    return text
 
 
 if __name__ == "__main__":

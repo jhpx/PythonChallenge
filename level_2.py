@@ -14,7 +14,9 @@ def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
 
 
 def solve(text):
-    return "".join(re.findall(r'[a-z]+', text))
+    answer = "".join(re.findall(r'[a-z]+', text))
+    print "Recognize the characters: {}\n".format(answer)
+    return answer
 
 
 if __name__ == "__main__":
