@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/evil.html
-# Deal cards? Deal evils?
+# Deal cards? Deal evils? 1,2,3,4,5.
 import urllib
 from cStringIO import StringIO
 # never use PIL 1.1.7 but Pillow 2.5+

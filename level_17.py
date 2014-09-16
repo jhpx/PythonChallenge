@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/romance.html
-# Eat cookies.
+# Cookie is new but busynothing is in the past.
 import urllib
 import urllib2
 import Cookie

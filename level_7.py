@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/oxygen.html
-# Message inside image.
+# ASCII inside an image.
 import urllib
 import re
 # never use PIL 1.1.7 but Pillow 2.5+

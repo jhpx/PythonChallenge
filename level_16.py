@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/mozart.html
-# let me get this straight
+# Let me get #FF00FF straight.
 import urllib
 from itertools import groupby
 # never use PIL 1.1.7 but Pillow 2.5+
