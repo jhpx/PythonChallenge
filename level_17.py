@@ -18,7 +18,7 @@ def solve(url, pattern):
     reo = re.compile(pattern)
     nothing = NOTHING
 
-    cookievals = []
+    info = ""
     cookie = Cookie.SimpleCookie()
     print "Following the busynothing chain and picking up the crumbs!"
     for i in range(400):
@@ -27,7 +27,7 @@ def solve(url, pattern):
             text = page.read()
             cookie_string = page.info().getheader('Set-Cookie')
             cookie.load(cookie_string)
-        cookievals.append(cookie['info'].value)
+        info += cookie['info'].value
         m = reo.search(text)
         print '{}:{}'.format(i, text)
         if m:
@@ -39,7 +39,7 @@ def solve(url, pattern):
     print "Decompressing the message:"
     import bz2
 
-    hidden = bz2.decompress(urllib.unquote_plus("".join(cookievals)))
+    hidden = bz2.decompress(urllib.unquote_plus(info))
     print hidden
     # is it the 26th already? call his father and inform him that "the flowers
     # are on their way". he'll understand.

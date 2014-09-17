@@ -20,11 +20,11 @@ def solve(fname, pattern):
     nothing = NOTHING
     print "Following the nothing chain and picking up the crumbs!"
     with zipfile.ZipFile(fname, 'r') as channel:
-        comments = []
+        comments = ""
         for i in range(1000):
             name = '{}.txt'.format(nothing)
             text = channel.read(name)
-            comments.append(channel.getinfo(name).comment)
+            comments += channel.getinfo(name).comment
             m = reo.search(text)
             print '{}:{}'.format(i, text)
             if m:
@@ -32,7 +32,7 @@ def solve(fname, pattern):
             else:
                 break
     print "Done\n"
-    print "".join(comments)
+    print comments
 
 if __name__ == "__main__":
     pattern = r'nothing is ([0-9]+)'
