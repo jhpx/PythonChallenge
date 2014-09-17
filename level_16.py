@@ -7,7 +7,6 @@ from itertools import groupby
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
 
-
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'mozart.gif'
 

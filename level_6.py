@@ -34,6 +34,7 @@ def solve(fname, pattern):
     print "Done\n"
     print comments
 
+
 if __name__ == "__main__":
     pattern = r'nothing is ([0-9]+)'
     fname = download(url)

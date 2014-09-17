@@ -3,11 +3,11 @@
 # http://huge:file@www.pythonchallenge.com/pc/return/balloons.html
 # Images inside hex deltas.
 import urllib
+import gzip
+import difflib
 from cStringIO import StringIO
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
-import gzip
-import difflib
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'deltas.gz'
