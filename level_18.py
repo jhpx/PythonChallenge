@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/balloons.html
-# Images inside hex deltas.
+# Images in difflib.
 import urllib
 import gzip
 import difflib

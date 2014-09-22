@@ -2,9 +2,9 @@
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/idiot2.html
 # HTTP/1.1 206 Partial content
+# @see http://tools.ietf.org/html/rfc2616#section-14.16
 import urllib2
 import re
-import base64
 from cStringIO import StringIO
 import zipfile
 
@@ -33,7 +33,7 @@ def explore(request, reo,  next, reverse=False):
 
 def solve():
     request = urllib2.Request(url)
-    base64string = base64.encodestring('butter:fly').rstrip()
+    base64string = 'butter:fly'.encode('base64').rstrip()
     request.add_header("Authorization", "Basic " + base64string)
     request.add_header("Range", '')
 

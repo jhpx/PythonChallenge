@@ -2,6 +2,7 @@
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/bin.html
 # Indian? Endian!
+# @see http://www.lightlink.com/tjweber/StripWav/Canon.html
 import urllib
 import contextlib
 import re
