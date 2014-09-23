@@ -42,6 +42,7 @@ def solve(pack):
             print result
             break
 
+
 if __name__ == "__main__":
     pack = prepare()
     answer = solve(pack)
