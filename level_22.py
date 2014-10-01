@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/copper.html
-# Draw according to the image sequence.
+# Draw points according to the image sequence.
 import urllib
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image

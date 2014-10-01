@@ -60,7 +60,7 @@ def solve(url, pattern):
     url3 = PREFIX_AUTH + whom + '.html'
     with contextlib.closing(urllib.urlopen(url3)) as page:
         address = re.findall(r'(\S+?)\.$', page.read())[0]
-    url4 = PREFIX + address
+    url4 = PREFIX + address  # violin.php
     opener = urllib2.build_opener()
     opener.addheaders.append(('Cookie', 'info=' + message))
     with contextlib.closing(opener.open(url4)) as page:
