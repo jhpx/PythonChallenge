@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/bonus.html
-# The 'this' module
+# The 'this' module.
 import urllib
 import contextlib
 import re
