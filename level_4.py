@@ -2,38 +2,43 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/linkedlist.php
 # And the next nothing is ?
-import urllib
-import contextlib
+import requests
 import re
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'linkedlist.php'
-NOTHING = 12345
 
 
-def solve(url, pattern):
-    reo = re.compile(pattern)
+def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
+    return re.findall(pattern, text, re.DOTALL)[cnt]
+
+
+def solve(url, NOTHING, MAXRANGE):
+    reo = re.compile(r'and the next nothing is ([0-9]+)')
     nothing = NOTHING
-    print "Following the nothing chain!"
-    for i in range(400):
-        weburl = "{}?nothing={}".format(url, nothing)
-        with contextlib.closing(urllib.urlopen(weburl)) as page:
-            text = page.read()
+    print("Following the nothing chain!")
+    for i in range(int(MAXRANGE)):
+        r = requests.get(url, params={'nothing': nothing})
+        text = r.text
         m = reo.search(text)
-        print '{}: {}'.format(i, text)
+        print('{}: {}'.format(i, text))
         if m:
             nothing = m.group(1)
         elif text.find(r'Divide by two') > -1:
             nothing = int(nothing) / 2
         else:
             break
-    print "Done\n"
+    print("Done\n")
     return text
 
 
 if __name__ == "__main__":
-    pattern = r'and the next nothing is ([0-9]+)'
-    answer = solve(url, pattern)
+    r = requests.get(url)
+    NOTHING = catch(r.text, r'nothing=([0-9]+)">')
+    MAXRANGE = catch(r.text, r'([0-9]+) times is more than enough')
+
+    # NOTHING=12345, MAXRANGE=400
+    answer = solve(url, NOTHING, MAXRANGE)
     # peak.html
-    print PREFIX + answer
+    print(PREFIX + answer)
     # http://www.pythonchallenge.com/pc/def/peak.html

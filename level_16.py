@@ -2,7 +2,8 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/mozart.html
 # Let me get #FF00FF straight.
-import urllib
+import requests
+from io import BytesIO
 from itertools import groupby
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
@@ -11,12 +12,8 @@ PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'mozart.gif'
 
 
-def download(url, cnt=0):
-    return urllib.urlretrieve(url)[cnt]
-
-
-def solve(fname):
-    im = Image.open(fname)
+def solve(something):
+    im = Image.open(BytesIO(something))
     width, height = im.size
     p = list(im.getdata())
 
@@ -40,8 +37,9 @@ def solve(fname):
 
 
 if __name__ == "__main__":
-    fname = download(url)
-    answer = solve(fname)
+    r = requests.get(url)
+    something = r.content
+    answer = solve(something)
     # romance
 
     # http://huge:file@www.pythonchallenge.com/pc/return/romance.html

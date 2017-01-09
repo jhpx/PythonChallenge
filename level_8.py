@@ -2,8 +2,7 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/integrity.html
 # Bee is busy.
-import urllib
-import contextlib
+import requests
 import re
 import bz2
 
@@ -11,25 +10,25 @@ PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'integrity.html'
 
 
-def catch(url, pattern=r'<!--(.*?)-->', cnt=0):
-    with contextlib.closing(urllib.urlopen(url)) as page:
-        return re.findall(pattern, page.read(), re.DOTALL)[cnt]
+def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
+    return re.findall(pattern, text, re.DOTALL)[cnt]
 
 
-def solve(text):
-    un_bz2 = re.findall(r'un: \'(.*?)\'', text)[0].decode('string-escape')
-    pw_bz2 = re.findall(r'pw: \'(.*?)\'', text)[0].decode('string-escape')
-    un = bz2.decompress(un_bz2)
-    pw = bz2.decompress(pw_bz2)
-    print "username: " + un
-    print "password: " + pw
-    print
+def solve(something):
+    un_bz2 = re.findall(r'un: \'(.*?)\'', something)[0].encode().decode('unicode_escape').encode('latin1')
+    pw_bz2 = re.findall(r'pw: \'(.*?)\'', something)[0].encode().decode('unicode_escape').encode('latin1')
+    un = bz2.decompress(un_bz2).decode()
+    pw = bz2.decompress(pw_bz2).decode()
+    print("username: " + un)
+    print("password: " + pw)
+    print()
     return un, pw
 
 
 if __name__ == "__main__":
-    text = catch(url)
-    un, pw = solve(text)
+    r = requests.get(url)
+    something = catch(r.text)
+    un, pw = solve(something)
     # huge, file
-    print "http://{}:{}@".format(un, pw) + PREFIX[7:-4] + 'return/good.html'
+    print("http://{}:{}@".format(un, pw) + PREFIX[7:-4] + 'return/good.html')
     # http://huge:file@www.pythonchallenge.com/pc/return/good.html

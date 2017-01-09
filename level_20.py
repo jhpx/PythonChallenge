@@ -3,62 +3,65 @@
 # http://butter:fly@www.pythonchallenge.com/pc/hex/idiot2.html
 # HTTP/1.1 206 Partial content
 # @see http://tools.ietf.org/html/rfc2616#section-14.16
-import urllib2
+import requests
 import re
-from cStringIO import StringIO
+from io import BytesIO
 import zipfile
 
-PREFIX = "http://www.pythonchallenge.com/pc/hex/"
+PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'unreal.jpg'
 
 
-def explore(request, reo,  next, reverse=False):
-    while(True):
-        request.headers['Range'] = 'bytes={}-'.format(next)
-        try:
-            resp = urllib2.urlopen(request)
-        except urllib2.HTTPError, err:
-            print "HTTP Error {}:{}\n".format(err.code, err.msg)
-            break
-        msg = resp.read()
-        print "{}:{}".format(next, msg.strip())
-        start, end, size = reo.findall(resp.info()['content-range'])[0]
-        if (reverse):
-            next = int(start) - 1
-        else:
-            next = int(end) + 1
+def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
+    return re.findall(pattern, text, re.DOTALL)[cnt]
 
+
+def explore(reo, next, forward=True):
+    while (True):
+        headers = {'Range': 'bytes={}-'.format(next)}
+        r = requests.get(url, headers=headers)
+        if r.ok:
+            msg = r.text
+            print("{}:{}".format(next, msg.strip()))
+            start, end, size = reo.findall(r.headers['content-range'])[0]
+            if (forward):
+                next = int(end) + 1
+            else:
+                next = int(start) - 1
+        else:
+            print("HTTP Error {}: {}\n".format(r.status_code, r.reason))
+            break
     return msg
 
 
 def solve():
-    request = urllib2.Request(url)
-    base64string = 'butter:fly'.encode('base64').rstrip()
-    request.add_header("Authorization", "Basic " + base64string)
-    request.add_header("Range", '')
+    reo = re.compile(r'bytes (\d+)-(\d+)/(\d+)')
+    r = requests.get(url, headers={'Range': ''})
+    start, end, size = reo.findall(r.headers['content-range'])[0]
 
-    reo = re.compile('bytes (\d+)-(\d+)/(\d+)')
-    resp = urllib2.urlopen(request)
-    start, end, size = reo.findall(resp.info()['content-range'])[0]
-
-    print "Following the content-range in forward direction!"
-    msg = explore(request, reo, int(end) + 1)
-    name = re.findall(r'\s([a-z]+).', msg)[0]
-
-    print "Following the content-range in backward direction!"
-    msg = explore(request, reo, size, True)
-    arch_pos = re.findall(r'\s(\d+).', msg)[0]
-    passwd = name[::-1]
-
-    request.headers['Range'] = 'bytes={}-'.format(arch_pos)
-    resp = urllib2.urlopen(request)
-    print "Found the hidden pack in {}:".format(arch_pos)
-    with zipfile.ZipFile(StringIO(resp.read()), 'r') as zip:
+    print("Following the content-range in forward direction!")
+    msg = explore(reo, int(end) + 1)
+    name = catch(msg, r'\s([a-z]+).')  # name = 'invader'
+    #
+    print("Following the content-range in backward direction!")
+    msg = explore(reo, size, False)
+    arch_pos = catch(msg, r'\s(\d+).')  # arch_pos = 1152983631
+    passwd = name[::-1].encode()  # passwd = b'redavni'
+    #
+    print("Access the hidden zipfile in {}:".format(arch_pos))
+    headers = {'Range': 'bytes={}-'.format(arch_pos)}
+    r = requests.get(url, headers=headers)
+    with zipfile.ZipFile(BytesIO(r.content), 'r') as zip:
         for name in zip.namelist():
-            if name.endswith('txt'):
-                print zip.read(name, passwd)
+            if name.endswith('.txt'):
+                print(name)
+                print("----------------------")
+                print(zip.read(name, passwd).decode())
             else:
-                return zip.read(name, passwd)
+                # Generate 'package.pack' in current folder
+                outfile = open(name, 'wb')
+                outfile.write(zip.read(name, passwd))
+                outfile.close()
 
 
 if __name__ == "__main__":

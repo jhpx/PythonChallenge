@@ -2,7 +2,8 @@
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/copper.html
 # Draw points according to the image sequence.
-import urllib
+import requests
+from io import BytesIO
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
 from PIL import ImageDraw
@@ -11,13 +12,8 @@ from PIL import ImageSequence
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'white.gif'
 
-
-def download(url, cnt=0):
-    return urllib.urlretrieve(url)[cnt]
-
-
-def solve(fname):
-    im = Image.open(fname)
+def solve(something):
+    im = Image.open(BytesIO(something))
     unknown = Image.new('RGB', im.size)
     draw = ImageDraw.Draw(unknown)
     cx, cy = 0, 100
@@ -36,8 +32,9 @@ def solve(fname):
 
 
 if __name__ == "__main__":
-    fname = download(url)
-    answer = solve(fname)
+    r = requests.get(url)
+    something = r.content
+    answer = solve(something)
     # bonus
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/bonus.html

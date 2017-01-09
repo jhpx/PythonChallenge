@@ -2,22 +2,18 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/italy.html
 # 100*100 = (100+99+99+98) + (...) + (2,1,1,0)
-import urllib
+import requests
+from io import BytesIO
 # never use PIL 1.1.7 but Pillow 2.5+
 from PIL import Image
-
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'wire.png'
 
 
-def download(url, cnt=0):
-    return urllib.urlretrieve(url)[cnt]
-
-
-def solve(fname):
+def solve(something):
     unknown = Image.new('RGB', (100, 100))
-    im = Image.open(fname)
+    im = Image.open(BytesIO(something))
     piv = unknown.load()
     i, j = 0, 0
     L = 99  # length of sprial edge, decrease by 2 for every circle
@@ -40,8 +36,11 @@ def solve(fname):
 
 
 if __name__ == "__main__":
-    fname = download(url)
-    answer = solve(fname)
+    r = requests.get(url)
+    something = r.content
+    answer = solve(something)
     # cat
 
     # http://huge:file@www.pythonchallenge.com/pc/return/cat.html
+    # see the cat's name is uzi
+    # http://huge:file@www.pythonchallenge.com/pc/return/uzi.html

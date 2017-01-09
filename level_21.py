@@ -4,42 +4,40 @@
 # Decompress, decompress and reverse.
 # @see http://tools.ietf.org/html/rfc1950#section-2.2
 # @see http://en.wikipedia.org/wiki/Bzip2#File_format
-import urllib2
-from cStringIO import StringIO
+import requests
+from io import BytesIO
 import zipfile
+import codecs
 
-PREFIX = "http://www.pythonchallenge.com/pc/hex/"
+PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'unreal.jpg'
+ARCH_POS = 1152983631
+PASSWD = b'redavni'
 
 
 def prepare():
-    request = urllib2.Request(url)
-    base64string = 'butter:fly'.encode('base64').rstrip()
-    request.add_header("Authorization", "Basic " + base64string)
-    arch_pos = 1152983631
-    passwd = 'redavni'
-    request.headers['Range'] = 'bytes={}-'.format(arch_pos)
-    resp = urllib2.urlopen(request)
-    with zipfile.ZipFile(StringIO(resp.read()), 'r') as zip:
-        return zip.read('package.pack', passwd)
+    headers = {'Range': 'bytes={}-'.format(ARCH_POS)}
+    r = requests.get(url, headers=headers)
+    with zipfile.ZipFile(BytesIO(r.content), 'r') as zip:
+        return zip.read('package.pack', PASSWD)
 
 
 def solve(pack):
-    zlib_header = '\x78\x9c'
-    bz2_header = 'BZh'
+    zlib_header = b'\x78\x9c'
+    bz2_header = b'BZh'
     result = ''
-    while(True):
+    while (True):
         if pack.startswith(zlib_header):
-            pack = pack.decode('zlib')
+            pack = codecs.decode(pack, 'zlib')
             result += ' '
         elif pack.startswith(bz2_header):
-            pack = pack.decode('bz2')
+            pack = codecs.decode(pack, 'bz2')
             result += '#'
         elif pack.endswith(zlib_header[::-1]):
             pack = pack[::-1]
             result += '\n'
         else:
-            print result
+            print(result)
             break
 
 

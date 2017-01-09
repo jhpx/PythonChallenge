@@ -2,43 +2,53 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/channel.html
 # Nothing in zipfile.
-import urllib
+import requests
 import re
 import zipfile
+from io import BytesIO
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'channel.zip'
-NOTHING = 90052
 
 
-def download(url, cnt=0):
-    return urllib.urlretrieve(url)[cnt]
+def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
+    return re.findall(pattern, text, re.DOTALL)[cnt]
 
 
-def solve(fname, pattern):
-    reo = re.compile(pattern)
+def analysis(something):
+    with zipfile.ZipFile(BytesIO(something), 'r') as channel:
+        readme = channel.read('readme.txt').decode()
+        NOTHING = catch(readme, r'start from ([0-9]+)')
+        MAXRANGE = len(channel.infolist())
+    return NOTHING, MAXRANGE
+
+
+def solve(something, NOTHING, MAXRANGE):
+    reo = re.compile(r'nothing is ([0-9]+)')
     nothing = NOTHING
-    print "Following the nothing chain and picking up the crumbs!"
-    with zipfile.ZipFile(fname, 'r') as channel:
+    print("Following the nothing chain and picking up the crumbs!")
+    with zipfile.ZipFile(BytesIO(something), 'r') as channel:
         comments = ""
-        for i in range(1000):
+        for i in range(int(MAXRANGE)):
             name = '{}.txt'.format(nothing)
-            text = channel.read(name)
-            comments += channel.getinfo(name).comment
+            text = channel.read(name).decode()
+            comments += channel.getinfo(name).comment.decode()
             m = reo.search(text)
-            print '{}:{}'.format(i, text)
+            print('{}:{}'.format(i, text))
             if m:
                 nothing = m.group(1)
             else:
                 break
-    print "Done\n"
-    print comments
+    print("Done\n")
+    print(comments)
 
 
 if __name__ == "__main__":
-    pattern = r'nothing is ([0-9]+)'
-    fname = download(url)
-    answer = solve(fname, pattern)
+    r = requests.get(url)
+    something = r.content
+    NOTHING, MAXRANGE = analysis(something)
+    # NOTHING=90052, MAXRANGE = 910
+    answer = solve(something, NOTHING, MAXRANGE)
     # oxygen
 
     # http://www.pythonchallenge.com/pc/def/oxygen.html
