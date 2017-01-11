@@ -2,9 +2,10 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/integrity.html
 # Bee is busy.
-import requests
-import re
 import bz2
+import re
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'integrity.html'

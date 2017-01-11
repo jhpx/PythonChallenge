@@ -2,10 +2,11 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/uzi.html
 # Jan.26th, 1??6 (Mon)
-import requests
-import re
 import calendar
+import re
 from datetime import date
+
+import requests
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + 'uzi.html'

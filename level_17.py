@@ -2,10 +2,11 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/romance.html
 # Cookie is new but busynothing is in the past.
-import requests
-import urllib.parse
-import re
 import codecs
+import re
+import urllib.parse
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 PREFIX_AUTH = "http://huge:file@www.pythonchallenge.com/pc/return/"

@@ -2,8 +2,9 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/linkedlist.php
 # And the next nothing is ?
-import requests
 import re
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'linkedlist.php'

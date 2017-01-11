@@ -4,10 +4,11 @@
 # Decompress, decompress and reverse.
 # @see http://tools.ietf.org/html/rfc1950#section-2.2
 # @see http://en.wikipedia.org/wiki/Bzip2#File_format
-import requests
-from io import BytesIO
-import zipfile
 import codecs
+import zipfile
+from io import BytesIO
+
+import requests
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'unreal.jpg'

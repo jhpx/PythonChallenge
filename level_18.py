@@ -2,11 +2,11 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/balloons.html
 # Images in difflib.
-import requests
-import gzip
 import difflib
+import gzip
 from io import BytesIO
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"

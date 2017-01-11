@@ -2,8 +2,9 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/equality.html
 # Regular expression.
-import requests
 import re
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'equality.html'

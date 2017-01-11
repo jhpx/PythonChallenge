@@ -2,11 +2,12 @@
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/bonus.html
 # The 'this' module.
-import requests
+import codecs
 import re
 import sys
-import codecs
 from io import StringIO
+
+import requests
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'bonus.html'
@@ -19,7 +20,6 @@ def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
 def solve(something):
     capture = StringIO()
     save_stdout, sys.stdout = sys.stdout, capture
-    import this
     sys.stdout = save_stdout
     guts = capture.getvalue().lower()
     message = codecs.encode(something,"rot13").strip('\n\'')

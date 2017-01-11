@@ -2,10 +2,10 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/oxygen.html
 # ASCII inside an image.
-import requests
 import re
 from io import BytesIO
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"

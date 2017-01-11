@@ -3,10 +3,11 @@
 # http://butter:fly@www.pythonchallenge.com/pc/hex/bin.html
 # Indian? Endian!
 # @see http://www.lightlink.com/tjweber/StripWav/Canon.html
-import requests
-import re
 import email
+import re
 from array import array
+
+import requests
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'bin.html'

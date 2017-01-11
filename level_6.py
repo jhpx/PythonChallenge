@@ -2,10 +2,11 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/channel.html
 # Nothing in zipfile.
-import requests
 import re
 import zipfile
 from io import BytesIO
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'channel.zip'

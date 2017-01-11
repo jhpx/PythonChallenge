@@ -2,9 +2,9 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/italy.html
 # 100*100 = (100+99+99+98) + (...) + (2,1,1,0)
-import requests
 from io import BytesIO
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"

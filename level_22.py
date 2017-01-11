@@ -2,9 +2,9 @@
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/copper.html
 # Draw points according to the image sequence.
-import requests
 from io import BytesIO
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageSequence

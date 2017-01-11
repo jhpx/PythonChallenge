@@ -2,9 +2,9 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/good.html
 # Connect the dots.
-import requests
 import re
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 from PIL import ImageDraw
 

@@ -2,8 +2,9 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/274877906944.html
 # Decrypt a string.
-import requests
 import re
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'map.html'

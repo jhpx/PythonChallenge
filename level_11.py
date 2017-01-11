@@ -2,9 +2,9 @@
 # coding=utf-8
 # http://huge:file@www.pythonchallenge.com/pc/return/5808.html
 # Odd even of an image.
-import requests
 from io import BytesIO
-# never use PIL 1.1.7 but Pillow 2.5+
+
+import requests
 from PIL import Image
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"

@@ -3,10 +3,11 @@
 # http://butter:fly@www.pythonchallenge.com/pc/hex/idiot2.html
 # HTTP/1.1 206 Partial content
 # @see http://tools.ietf.org/html/rfc2616#section-14.16
-import requests
 import re
-from io import BytesIO
 import zipfile
+from io import BytesIO
+
+import requests
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'unreal.jpg'

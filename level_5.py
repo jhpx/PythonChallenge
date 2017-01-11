@@ -2,10 +2,11 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/peak.html
 # Peak hell pronounced like 'pickle'.
-import requests
-import re
 import pickle
+import re
 from io import BytesIO
+
+import requests
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'peak.html'
