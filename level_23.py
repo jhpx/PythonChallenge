@@ -20,6 +20,7 @@ def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
 def solve(something):
     capture = StringIO()
     save_stdout, sys.stdout = sys.stdout, capture
+    import this
     sys.stdout = save_stdout
     guts = capture.getvalue().lower()
     message = codecs.encode(something,"rot13").strip('\n\'')
