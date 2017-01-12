@@ -58,11 +58,12 @@ def solve(something):
         for name in zip.namelist():
             if name.endswith('.jpg'):
                 Image.open(BytesIO(zip.read(name))).show()
+            elif name.endswith('.zip'):
+                # Generate 'mybroken.zip' in current folder
+                outfile = open(name, 'wb')
+                outfile.write(zip.read(name))
+                outfile.close()
 
-    # Generate 'hidden.zip' in current folder
-    outfile = open('hidden.zip', 'wb')
-    outfile.write(hidden)
-    outfile.close()
     return
 
 
