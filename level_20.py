@@ -60,9 +60,7 @@ def solve():
                 print(zip.read(name, passwd).decode())
             else:
                 # Generate 'package.pack' in current folder
-                outfile = open(name, 'wb')
-                outfile.write(zip.read(name, passwd))
-                outfile.close()
+                zip.extract(name, pwd=passwd)
 
 
 if __name__ == "__main__":

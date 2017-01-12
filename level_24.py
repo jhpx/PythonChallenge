@@ -60,9 +60,7 @@ def solve(something):
                 Image.open(BytesIO(zip.read(name))).show()
             elif name.endswith('.zip'):
                 # Generate 'mybroken.zip' in current folder
-                outfile = open(name, 'wb')
-                outfile.write(zip.read(name))
-                outfile.close()
+                zip.extract(name)
 
     return
 
