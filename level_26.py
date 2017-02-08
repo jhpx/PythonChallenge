@@ -3,9 +3,8 @@
 # http://butter:fly@www.pythonchallenge.com/pc/hex/decent.html
 # Email leopold and fix the broken zip.
 import hashlib
-from io import BytesIO
 import zipfile
-from PIL import Image
+from io import BytesIO
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'decent.html'

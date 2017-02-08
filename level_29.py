@@ -2,9 +2,11 @@
 # coding=utf-8
 # http://repeat:switch@www.pythonchallenge.com/pc/ring/guido.html
 # Count spaces.
-import requests
-import re
 import bz2
+import re
+
+import requests
+
 PREFIX = "http://repeat:switch@www.pythonchallenge.com/pc/ring/"
 url = PREFIX + 'guido.html'
 

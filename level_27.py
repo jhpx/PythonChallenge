@@ -3,10 +3,11 @@
 # http://butter:fly@www.pythonchallenge.com/pc/hex/speedboat.html
 # Difference between data and palette[data].
 # @see https://www.w3.org/Graphics/GIF/spec-gif87.txt
-import requests
-from io import BytesIO
-from PIL import Image
 import bz2
+from io import BytesIO
+
+import requests
+from PIL import Image
 
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'zigzag.gif'

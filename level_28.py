@@ -2,8 +2,9 @@
 # coding=utf-8
 # http://repeat:switch@www.pythonchallenge.com/pc/ring/bell.html
 # Difference between next(green) and next(green).
-import requests
 from io import BytesIO
+
+import requests
 from PIL import Image
 
 PREFIX = "http://repeat:switch@www.pythonchallenge.com/pc/ring/"
