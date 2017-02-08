@@ -1,7 +1,7 @@
 #!/bin/env python
 # coding=utf-8
 # http://butter:fly@www.pythonchallenge.com/pc/hex/decent.html
-# Splice the wav(image) files.
+# Email leopold and fix the broken zip.
 import hashlib
 from io import BytesIO
 import zipfile
@@ -40,7 +40,8 @@ def solve(data):
     with zipfile.ZipFile(BytesIO(data), 'r') as zip:
         for name in zip.namelist():
             if name.endswith('.gif'):
-                Image.open(BytesIO(zip.read(name))).show()
+                zip.extract(name)
+                #Image.open(BytesIO(zip.read(name))).show()
     return
 
 
@@ -50,4 +51,5 @@ if __name__ == "__main__":
     answer = solve(data)
     # speed
 
+    # Hurry up, I'm missing the boat
     # http://butter:fly@www.pythonchallenge.com/pc/hex/speedboat.html
