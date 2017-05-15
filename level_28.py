@@ -11,20 +11,13 @@ PREFIX = "http://repeat:switch@www.pythonchallenge.com/pc/ring/"
 url = PREFIX + 'bell.png'
 
 
-def paired(data):
-    data = iter(data)
-    while True:
-        yield next(data), next(data)
-
-
 def solve(something):
     im = Image.open(BytesIO(something))
     red, green, blue = im.split()
-    result = []
-    for a, b in paired(green.getdata()):
-        diff = abs(a - b)
-        if diff != 42:
-            result.append(diff)
+    data1 = list(green.getdata())[::2]
+    data2 = list(green.getdata())[1::2]
+    differences = [abs(a - b) for a, b in zip(data1, data2) if a != b]
+    result = filter(lambda x: x != 42, differences)
     answer = bytes(result).decode()
     return answer
 
