@@ -2,21 +2,18 @@
 # coding=utf-8
 # http://www.pythonchallenge.com/pc/def/oxygen.html
 # ASCII inside an image.
-import urllib
 import re
-# never use PIL 1.1.7 but Pillow 2.5+
+from io import BytesIO
+
+import requests
 from PIL import Image
 
 PREFIX = "http://www.pythonchallenge.com/pc/def/"
 url = PREFIX + 'oxygen.png'
 
 
-def download(url, cnt=0):
-    return urllib.urlretrieve(url)[cnt]
-
-
-def solve(fname):
-    im = Image.open(fname)
+def solve(something):
+    im = Image.open(BytesIO(something))
     width, height = im.size
 
     upper = -1
@@ -33,17 +30,18 @@ def solve(fname):
                 right = i
             break
     box = (left, upper, right, lower)
-    print "Selecting the message area: " + str(box)
-    samplesize = ((right - left + 1) / 7, 1)
-    text = im.crop(box).convert('L').resize(samplesize).tostring()
+    print("Selecting the message area: " + str(box))
+    samplesize = ((right - left + 1) // 7, 1)
+    text = im.crop(box).convert('L').resize(samplesize).tobytes().decode()
     hidden = "".join([chr(int(x)) for x in re.findall(r'\d+', text)])
-    print "The hidden message is: {}\n".format(hidden)
+    print("The hidden message is: {}\n".format(hidden))
     return hidden
 
 
 if __name__ == "__main__":
-    fname = download(url)
-    answer = solve(fname)
+    r = requests.get(url)
+    something = r.content
+    answer = solve(something)
     # integrity
-    print PREFIX + answer + '.html'
+    print(PREFIX + answer + '.html')
     # http://www.pythonchallenge.com/pc/def/integrity.html
