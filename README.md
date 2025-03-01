@@ -4,7 +4,7 @@ This repository includes solutions to the Python Challenge quizzes for practice 
 
 Website: [The Python Challenge](http://www.pythonchallenge.com/) — enjoy!
 
-(There are bugs in level_13、level_17 under python 3.13 on 2025.)
+(There are network issues in level_13、level_15、level_17 in China.)
 
 ### Level 0
 2 to 38 = ?

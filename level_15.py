@@ -29,6 +29,7 @@ def solve(year):
     # 1756/01/27
 
     wikiurl = 'https://en.wikipedia.org/wiki/January_27'
+    # This line will raise an exception if you're within the Great Firewall (GFW).
     r = requests.get(wikiurl)
     text = catch(r.text, '<li><a href="/wiki/' + year + '.*?</a>(.*?)</li>')
     text = re.findall(r'<a.*?>(.+?)</a>', text)[0]

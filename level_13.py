@@ -4,6 +4,7 @@
 # Phone that (remote) evil.
 import re
 import xmlrpc.client
+from ftplib import print_line
 
 PREFIX = "http://huge:file@www.pythonchallenge.com/pc/return/"
 url = PREFIX + '../phonebook.php'
@@ -12,9 +13,10 @@ url = PREFIX + '../phonebook.php'
 def solve(url):
     print("Looking up Bert(Evil):")
     phonebook = xmlrpc.client.ServerProxy(url)
+    # This line will raise an exception if you're within the Great Firewall (GFW).
     response = phonebook.phone('Bert')
     whom = re.findall(r'[A-Z]+', response)[0].lower()
-    println(whom)
+    print_line(whom)
 
     return whom
 

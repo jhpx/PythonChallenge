@@ -52,6 +52,7 @@ def solve(url):
     import xmlrpc.client
 
     url2 = PREFIX_AUTH + '../phonebook.php'
+    # This line will raise an exception if you're within the Great Firewall (GFW).
     phonebook = xmlrpc.client.ServerProxy(url2)
     response = phonebook.phone('Leopold')
     whom = catch(response, r'[A-Z]+').lower()
