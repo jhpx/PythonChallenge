@@ -1,10 +1,7 @@
 # Python Challenge Solutions
 
-This repository contains the solutions to the quizzes on the Python Challenge website.  
-It is intended for Python practice and fun.  
-The website is [The Python Challenge](http://www.pythonchallenge.com), enjoy it~~
-
-## Levels
+This repository includes solutions to the Python Challenge quizzes for practice and fun.
+Website: [The Python Challenge](http://www.pythonchallenge.com/) — enjoy!
 
 ### Level 0
 2 to 38 = ?
@@ -106,3 +103,5 @@ Floats, image, formula.
 ### Level 31
 Google the grandpa rock and find the differences between two Mandelbrot images.  
 See [Mandelbrot Set](https://en.wikipedia.org/wiki/Mandelbrot_set)
+
+(There are bugs in level_07、level_13、level_15、level_17、level_30 under python 3.13.)
