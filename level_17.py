@@ -48,7 +48,7 @@ def solve(url):
     # the flowers are on their way
     print()
     #
-    print("Looking up Mozart's father (Leopold):", end=' ')
+    print("Looking up Mozart's father (Leopold):")
     import xmlrpc.client
 
     url2 = PREFIX_AUTH + '../phonebook.php'

@@ -31,11 +31,13 @@ def solve(something):
             break
     box = (left, upper, right, lower)
     print("Selecting the message area: " + str(box))
-    samplesize = ((right - left + 1) // 7, 1)
-    text = im.crop(box).convert('L').resize(samplesize).tobytes().decode()
-    hidden = "".join([chr(int(x)) for x in re.findall(r'\d+', text)])
-    print("The hidden message is: {}\n".format(hidden))
-    return hidden
+    gray_im = im.crop(box).convert('L')
+    text = ''.join(chr(gray_im.getpixel((x, 0))) for x in range(left, right, 7))
+    print("The hidden message is: {}".format(text))
+    # smart guy, you made it. the next level is [105, 110, 116, 101, 103, 114, 105, 116, 121]
+    result = "".join([chr(int(x)) for x in re.findall(r'\d+', text)])
+    print("The result message is: {}\n".format(result))
+    return result
 
 
 if __name__ == "__main__":

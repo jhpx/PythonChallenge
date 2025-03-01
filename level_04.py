@@ -19,8 +19,8 @@ def solve(url, NOTHING, MAXRANGE):
     nothing = NOTHING
     print("Following the nothing chain!")
     for i in range(int(MAXRANGE)):
-        r = requests.get(url, params={'nothing': nothing})
-        text = r.text
+        response = requests.get(url, params={'nothing': nothing})
+        text = response.text
         m = reo.search(text)
         print('{}: {}'.format(i, text))
         if m:

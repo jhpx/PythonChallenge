@@ -49,7 +49,11 @@ def solve(something):
     # +str(x[i+2])[6]
 
     result = []
-    for a, b, c in perthree(text):
+    for i in range(0, len(text), 3):
+        group = text[i:i + 3]
+        if len(group) != 3:
+            break
+        a, b, c = group
         result.append(int(a[5] + b[5] + c[6]))
     message = bytes(result).decode()
     return message

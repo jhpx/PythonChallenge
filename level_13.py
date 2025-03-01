@@ -10,12 +10,12 @@ url = PREFIX + '../phonebook.php'
 
 
 def solve(url):
-    print("Looking up Bert(Evil):", end=' ')
+    print("Looking up Bert(Evil):")
     phonebook = xmlrpc.client.ServerProxy(url)
     response = phonebook.phone('Bert')
     whom = re.findall(r'[A-Z]+', response)[0].lower()
-    print(whom)
-    print()
+    println(whom)
+
     return whom
 
 
