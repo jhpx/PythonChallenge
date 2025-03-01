@@ -29,12 +29,6 @@ def factor(n):
     return factors
 
 
-def perthree(data):
-    data = iter(data)
-    while True:
-        yield next(data), next(data), next(data)
-
-
 def solve(something):
     text = something.replace('\n', ' ').split(', ')
     values = [float(p) for p in text]

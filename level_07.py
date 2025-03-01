@@ -31,6 +31,7 @@ def solve(something):
             break
     box = (left, upper, right, lower)
     print("Selecting the message area: " + str(box))
+
     gray_im = im.crop(box).convert('L')
     text = ''.join(chr(gray_im.getpixel((x, 0))) for x in range(left, right, 7))
     print("The hidden message is: {}".format(text))
