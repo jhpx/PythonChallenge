@@ -107,3 +107,9 @@ Floats, image, formula.
 Google the grandpa rock and find the differences between two Mandelbrot images.  
 See [Mandelbrot Set](https://en.wikipedia.org/wiki/Mandelbrot_set)
 
+### Level 32
+Nonogram is a type of clue-based grid-filling puzzle.
+See [Nonogram](https://en.wikipedia.org/wiki/Nonogram)
+The CP-SAT solver in OR-Tools can solve such problems using boolean variables and constraints.
+See [考えるコード ― 制約と最適化の冒険](https://ruoyu0088.github.io/thinking_code/index.html)
+
