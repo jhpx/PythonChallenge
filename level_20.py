@@ -18,6 +18,7 @@ def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
 
 
 def explore(reo, next, forward=True):
+    msg = ''
     while (True):
         headers = {'Range': 'bytes={}-'.format(next)}
         r = requests.get(url, headers=headers)

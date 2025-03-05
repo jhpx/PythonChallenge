@@ -20,20 +20,20 @@ def analysis(something):
     with zipfile.ZipFile(BytesIO(something), 'r') as channel:
         readme = channel.read('readme.txt').decode()
         NOTHING = catch(readme, r'start from ([0-9]+)')
-        MAXRANGE = len(channel.infolist())
-    return NOTHING, MAXRANGE
+        MAX_RANGE = len(channel.infolist())
+    return NOTHING, MAX_RANGE
 
 
-def solve(something, NOTHING, MAXRANGE):
+def solve(something, nothing, MAXRANGE):
     reo = re.compile(r'nothing is ([0-9]+)')
-    nothing = NOTHING
+    nothing = nothing
     print("Following the nothing chain and picking up the crumbs!")
     with zipfile.ZipFile(BytesIO(something), 'r') as channel:
-        comments = ""
+        comments = []
         for i in range(int(MAXRANGE)):
             name = '{}.txt'.format(nothing)
             text = channel.read(name).decode()
-            comments += channel.getinfo(name).comment.decode()
+            comments.append(channel.getinfo(name).comment.decode())
             m = reo.search(text)
             print('{}:{}'.format(i, text))
             if m:
@@ -41,7 +41,7 @@ def solve(something, NOTHING, MAXRANGE):
             else:
                 break
     print("Done\n")
-    print(comments)
+    return "".join(comments)
 
 
 if __name__ == "__main__":
@@ -50,6 +50,7 @@ if __name__ == "__main__":
     NOTHING, MAXRANGE = analysis(something)
     # NOTHING=90052, MAXRANGE = 910
     answer = solve(something, NOTHING, MAXRANGE)
+    print(answer)
     # oxygen
 
     # http://www.pythonchallenge.com/pc/def/oxygen.html

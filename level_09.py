@@ -19,13 +19,17 @@ def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
 def solve(something):
     first, second = re.findall(
         r'first:(.*?)second:(.*)', something.replace('\n', ''))[0]
-    L1 = list(map(int, first.split(',')))
-    L2 = list(map(int, second.split(',')))
+    l1 = list(map(int, first.split(',')))
+    l2 = list(map(int, second.split(',')))
 
+    return l1, l2
+
+
+def plot(l1, l2):
     im = Image.new("RGB", (640, 480))
     draw = ImageDraw.Draw(im)
-    draw.polygon(L1)
-    draw.polygon(L2)
+    draw.polygon(l1)
+    draw.polygon(l2)
 
     im.show()
 
@@ -34,6 +38,7 @@ if __name__ == "__main__":
     r = requests.get(url)
     something = catch(r.text, cnt=1)
     answer = solve(something)
+    plot(*answer)
     # bull graph
 
     # http://huge:file@www.pythonchallenge.com/pc/return/bull.html

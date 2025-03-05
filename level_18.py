@@ -46,13 +46,18 @@ def solve(something):
     background.paste(im1, (0, 0))
     background.paste(im2, (0, im1.size[1]))
     background.paste(im3, (0, im1.size[1] + im2.size[1]))
-    background.show()
+    return background
+
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
+    plot(answer)
     # ../hex/bin.html, butter, fly
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/bin.html

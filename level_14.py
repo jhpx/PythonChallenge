@@ -32,13 +32,18 @@ def solve(something):
             i += 1
             N += 4 * L
             L -= 2
-    unknown.show()
+    return unknown
+
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
+    plot(answer)
     # cat
 
     # http://huge:file@www.pythonchallenge.com/pc/return/cat.html

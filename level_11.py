@@ -15,6 +15,10 @@ def solve(something):
     im = Image.open(BytesIO(something))
     data = list(im.getdata())
     im.putdata(data[::2] + data[1::2])
+    return im
+
+
+def plot(im):
     im.show()
 
 
@@ -22,6 +26,7 @@ if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
-    # evil
+    plot(answer)
+    # 'evil' in the graph
 
     # http://huge:file@www.pythonchallenge.com/pc/return/evil.html

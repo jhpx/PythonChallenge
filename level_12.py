@@ -21,13 +21,18 @@ def solve(something):
         im = Image.open(BytesIO(piece)).resize((640 // 5, 96))
         background.paste(im, (cur_width, 0))
         cur_width += im.size[0]
-    background.show()
+    return background
+
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
+    plot(answer)
     # disproportional
 
     # http://huge:file@www.pythonchallenge.com/pc/return/disproportional.html

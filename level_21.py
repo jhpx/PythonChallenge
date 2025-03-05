@@ -26,25 +26,26 @@ def prepare():
 def solve(pack):
     zlib_header = b'\x78\x9c'
     bz2_header = b'BZh'
-    result = ''
+    result = []
     while (True):
         if pack.startswith(zlib_header):
             pack = codecs.decode(pack, 'zlib')
-            result += ' '
+            result.append(' ')
         elif pack.startswith(bz2_header):
             pack = codecs.decode(pack, 'bz2')
-            result += '#'
+            result.append('#')
         elif pack.endswith(zlib_header[::-1]):
             pack = pack[::-1]
-            result += '\n'
+            result.append('\n')
         else:
-            print(result)
             break
+    return "".join(result)
 
 
 if __name__ == "__main__":
     pack = prepare()
     answer = solve(pack)
+    print(answer)
     # copper
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/copper.html

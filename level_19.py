@@ -33,7 +33,7 @@ def solve(something):
 if __name__ == "__main__":
     r = requests.get(url)
     something = catch(r.text)
-    answer = solve(something)
+    solve(something)
     # You are an idiot ha ha ha ha ah ha ha haha ha haha.
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/idiot.html

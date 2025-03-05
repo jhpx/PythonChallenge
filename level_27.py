@@ -40,7 +40,7 @@ def solve(something):
     for word in allwords:
         if not keyword.iskeyword(word) and word != 'print' and word != 'exec' and word not in answer:
             answer.append(word)
-    return answer
+    return ",".join(answer)
 
 
 if __name__ == "__main__":
@@ -48,5 +48,5 @@ if __name__ == "__main__":
     something = r.content
     answer = solve(something)
     # ../ring/bell.html, repeat, switch
-    print(",".join(answer))
+    print(answer)
     # http://repeat:switch@www.pythonchallenge.com/pc/ring/bell.html

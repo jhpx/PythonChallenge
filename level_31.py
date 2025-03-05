@@ -8,6 +8,7 @@ from io import BytesIO
 
 import requests
 from PIL import Image
+from sympy import primefactors
 
 # First google the picture.
 # Koh Samui
@@ -17,25 +18,6 @@ from PIL import Image
 PREFIX = "http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/"
 url1 = PREFIX + 'grandpa.html'
 url2 = PREFIX + 'mandelbrot.gif'
-
-
-def factor(n):
-    "Adapted from http://www.math.utah.edu/~carlson/notes/python.pdf"
-    d = 2
-    factors = []
-    while not n % d:
-        factors.append(d)
-        n //= d
-    d = 3
-    while n > 1 and d * d <= n:
-        if not n % d:
-            factors.append(d)
-            n //= d
-        else:
-            d += 2
-    if n > 1:
-        factors.append(n)
-    return factors
 
 
 def catch(text, pattern=r'<!--(.*?)-->', cnt=0):
@@ -55,6 +37,7 @@ def mandelbrot(left, top, width, height, max, size):
                     break
             yield i
 
+
 def solve(page, picture):
     ufos = Image.open(BytesIO(picture))
 
@@ -68,13 +51,14 @@ def solve(page, picture):
 
     differences = [a - b for a, b in zip(ufos.getdata(), mandel.getdata()) if a != b]
 
-    plot = Image.new('L', factor(len(differences)))
+    plot = Image.new('L', primefactors(len(differences)))
     plot.putdata([(i < 16) and 255 or 0 for i in differences])
-    plot.show()
 
-    # Google this plot and the answer is Arecibo message
-    # https://en.wikipedia.org/wiki/Arecibo_message
-    return None
+    return plot
+
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
@@ -83,5 +67,8 @@ if __name__ == "__main__":
     page = r1.text
     picture = r2.content
     answer = solve(page, picture)
+    plot(answer)
+    # Google this plot and the answer is Arecibo message
+    # https://en.wikipedia.org/wiki/Arecibo_message
 
     # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/arecibo.html

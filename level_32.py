@@ -1,105 +1,128 @@
 #!/bin/env python
 # coding=utf-8
 # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/arecibo.html
+import re
 
 import requests
-from PIL import Image, ImageDraw
 
 PREFIX = "http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/"
 url = PREFIX + 'warmup.txt'
 
 
-def parse_data(data):
-    lines = iter(data.splitlines())
-    width, height = 0, 0
-    rows, cols = [], []
-    for line in lines:
-        if line.startswith("#"):
-            continue
-        if line.strip() == "":
-            break
-        if width == 0:
-            width, height = map(int, line.split())
-        else:
-            rows.append(list(map(int, line.split())))
-    for line in lines:
-        if line.strip() == "":
-            continue
-        cols.append(list(map(int, line.split())))
-    return width, height, rows, cols
+def catch(text, pattern=r'<a href="(.*?)">', cnt=0):
+    return re.findall(pattern, text, re.DOTALL)[cnt]
 
 
-def solve_nonogram(width, height, rows, cols):
-    grid = [[0] * width for _ in range(height)]
-
-    def is_valid_row(row, hints):
-        current = []
-        count = 0
-        for cell in row:
-            if cell == 1:
-                count += 1
-            elif count > 0:
-                current.append(count)
-                count = 0
-        if count > 0:
-            current.append(count)
-        return current == hints
-
-    def backtrack(y):
-        if y == height:
-            for x in range(width):
-                column = [grid[y][x] for y in range(height)]
-                if not is_valid_row(column, cols[x]):
-                    return False
-            return True
-        row_hint = rows[y]
-        for candidate in generate_candidates(width, row_hint):
-            grid[y] = candidate
-            if backtrack(y + 1):
-                return True
-        return False
-
-    backtrack(0)
-    return grid
+# ----------------------------------------------------------------------------------------------
+# Adapted from https://ruoyu0088.github.io/thinking_code/ortools-sat_nonogram.html
+# By 株式会社フォン
+# © Copyright 2024.
+from ortools.sat.python import cp_model
+import string
 
 
-def generate_candidates(width, hint):
-    from itertools import combinations
-    blocks = len(hint)
-    total = sum(hint) + blocks - 1
-    if total > width:
-        return []
-    positions = width - total
-    gaps = [0] + [1] * (blocks - 1) + [0]
-    for combo in combinations(range(positions + len(gaps)), len(gaps)):
-        gaps_sizes = [combo[i] - combo[i - 1] for i in range(1, len(combo))]
-        if any(s < 0 for s in gaps_sizes):
-            continue
-        row = []
-        for i in range(blocks):
-            row += [0] * gaps_sizes[i]
-            row += [1] * hint[i]
-            if i < blocks - 1:
-                row += [0] * 1
-        row += [0] * (width - len(row))
-        yield row
+def place_numbers(model, numbers, width, prefix=""):
+    locations = [model.new_int_var(0, width - 1, f"{prefix}{name}") for _, name in zip(numbers, string.ascii_uppercase)]
+    for n1, n2, c in zip(locations[:-1], locations[1:], numbers):
+        model.add(n2 > n1 + c)
+    model.add(locations[-1] <= width - numbers[-1])
+    return locations
 
 
-def solve(width, height, rows, cols):
-    solution = solve_nonogram(width, height, rows, cols)
-    img = Image.new("RGB", (width * 10, height * 10), "white")
-    draw = ImageDraw.Draw(img)
-    for y in range(height):
-        for x in range(width):
-            if solution[y][x] == 1:
-                draw.rectangle([x * 10, y * 10, (x + 1) * 10, (y + 1) * 10], fill="black")
-    img.show()
-    return ""
+def fill_pattern(model, numbers, targets, prefix=""):
+    width = len(targets)
+    count = len(numbers)
+    locations = place_numbers(model, numbers, width, prefix)
+
+    fills = {}
+    for i in range(width):
+        for j in range(count):
+            fills[i, j] = model.new_bool_var(f'{locations[j].name}_{i}')
+
+    for j, n in enumerate(locations):
+        for i in range(width - numbers[j] + 1):
+            # b is equal to locations[j] == i
+            b = model.new_bool_var(f'{n.name}_{i}')
+            model.add(n == i).only_enforce_if(b)
+            model.add(n != i).only_enforce_if(~b)
+
+            # fill fills by b
+            tmp = [fills[x, j] if i <= x < i + numbers[j] else ~fills[x, j] for x in range(width)]
+            model.add_bool_and(tmp).only_enforce_if(b)
+
+    for i, t in enumerate(targets):
+        bools = [fills[i, j] for j in range(count)]
+        # if target is True then fills[i, *] must have one True
+        model.add_bool_or(bools).only_enforce_if(t)
+        # if target is False then all fills[i, *] must be False
+        model.add_bool_and([~v for v in bools]).only_enforce_if(~t)
+
+
+def solve_nonogram(row_clues, col_clues):
+    model = cp_model.CpModel()
+    width = len(col_clues)
+    height = len(row_clues)
+    cells = [[model.new_bool_var(f"T_{r}_{c}") for c in range(width)] for r in range(height)]
+    for r, numbers in enumerate(row_clues):
+        line = cells[r]
+        fill_pattern(model, numbers, line, f"R{r}")
+
+    for c, numbers in enumerate(col_clues):
+        line = [cells[i][c] for i in range(height)]
+        fill_pattern(model, numbers, line, f"C{c}")
+
+    solver = cp_model.CpSolver()
+    solver.solve(model)
+    return [[solver.value(c) for c in row] for row in cells]
+
+
+def print_nonogram(result):
+    print("\n".join([" ".join([" #"[c] for c in row]) for row in result]))
+
+
+# ----------------------------------------------------------------------------------------------
+
+def parse(text):
+    # Split into non-empty, stripped lines
+    lines = [line.strip() for line in text.strip().split('\n') if line.strip()]
+    # Find the indices of each section
+    i_dim = next(i for i, line in enumerate(lines) if line.startswith('# Dimensions'))
+    i_hor = next(i for i, line in enumerate(lines) if i > i_dim and line.startswith('# Horizontal'))
+    i_ver = next(i for i, line in enumerate(lines) if i > i_hor and line.startswith('# Vertical'))
+    # Parse rows and columns
+    r, c = map(int, lines[i_dim + 1].split())
+    # Extract horizontal and vertical constraints
+    row_clues = [list(map(int, line.split())) for line in lines[i_hor + 1:i_ver]]
+    col_clues = [list(map(int, line.split())) for line in lines[i_ver + 1:]]
+    return r, c, row_clues, col_clues
+
+
+def solve(r_num, c_num):
+    print_nonogram(solve_nonogram(r_num, c_num))
+    # See an up arrow
+
+    url = PREFIX + 'up.html'
+    # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/up.html"
+
+    url2 = PREFIX + catch(requests.get(url).text)
+    # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/up.txt"
+
+    r, c, r_num, c_num = parse(requests.get(url2).text)
+    print_nonogram(solve_nonogram(r_num, c_num))
+    # See a python
+
+    url3 = PREFIX + 'python.html'
+    something = catch(requests.get(url3).text, pattern=r'<br/>\s*<br/>\s*(.*?)\s*</font>', cnt=0)
+    return something
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.text
-    width, height, rows, cols = parse_data(something)
-    answer = solve(width, height, rows, cols)
-    # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/arrow.html
+    r, c, r_num, c_num = parse(something)
+    answer = solve(r_num, c_num)
+    print(answer)
+    # "Free" as in "Free speech", not as in "free...
+    # Google this sentence and the answer is beer
+
+    # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/beer.html

@@ -16,6 +16,8 @@ url = PREFIX + 'maze.png'
 # White is the wall. Black is the path. Red is the hidden data.
 def build_graph(im):
     width, height = im.size
+    start = None
+    end = None
     G = nx.Graph()
     for i in range(width):
         for j in range(height):
@@ -53,22 +55,28 @@ def solve(something):
     im2.show()
     #
     print("Extracting hidden data...")
+    result = None
     hidden = bytes([im.getpixel(coords)[0] for coords in path[1::2]])
     with zipfile.ZipFile(BytesIO(hidden), 'r') as zip:
         for name in zip.namelist():
             if name.endswith('.jpg'):
-                Image.open(BytesIO(zip.read(name))).show()
+                result = BytesIO(zip.read(name))
             elif name.endswith('.zip'):
                 # Generate 'mybroken.zip' in current folder
                 zip.extract(name)
 
-    return
+    return result
+
+
+def plot(byte_io):
+    Image.open(byte_io).show()
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
+    plot(answer)
     # lake
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/lake.html

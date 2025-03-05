@@ -14,22 +14,28 @@ url = PREFIX + 'lake.html'
 
 def solve():
     pieces = []
+    piece_size = 0
     for i in range(25):
         r = requests.get(PREFIX + 'lake' + str(i + 1) + '.wav')
         f = wave.open(BytesIO(r.content))
-        nframes = f.getnframes()  # 10800
-        piecesize = int((nframes // 3) ** (.5))  # 60
-        pieces.append(Image.frombytes('RGB', (piecesize, piecesize), f.readframes(nframes)))
+        frames = f.getnframes()  # 10800
+        piece_size = int((frames // 3) ** .5)  # 60
+        pieces.append(Image.frombytes('RGB', (piece_size, piece_size), f.readframes(frames)))
     #
-    canvas = Image.new('RGB', (piecesize * 5, piecesize * 5))
+    canvas = Image.new('RGB', (piece_size * 5, piece_size * 5))
     for i in range(25):
-        canvas.paste(pieces[i], ((i % 5) * piecesize, (i // 5) * piecesize))
-    canvas.show()
-    return
+        canvas.paste(pieces[i], ((i % 5) * piece_size, (i // 5) * piece_size))
+
+    return canvas
+
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
     answer = solve()
     # decent
+    plot(answer)
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/decent.html

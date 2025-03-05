@@ -6,6 +6,8 @@ import hashlib
 import zipfile
 from io import BytesIO
 
+from PIL import Image
+
 PREFIX = "http://butter:fly@www.pythonchallenge.com/pc/hex/"
 url = PREFIX + 'decent.html'
 
@@ -24,9 +26,9 @@ def prepare():
 
 
 def repair(broken, MD5):
-    allchars = list(range(256))
+    all_chars = list(range(256))
     for i, bak in enumerate(broken):
-        for ch in allchars:
+        for ch in all_chars:
             broken[i] = ch
             if hashlib.md5(broken).hexdigest() == MD5:
                 print('Find it:{}-{}'.format(i, ch))
@@ -36,18 +38,22 @@ def repair(broken, MD5):
 
 
 def solve(data):
+    result = None
     with zipfile.ZipFile(BytesIO(data), 'r') as zip:
         for name in zip.namelist():
             if name.endswith('.gif'):
                 zip.extract(name)
-                #Image.open(BytesIO(zip.read(name))).show()
-    return
+                result = BytesIO(zip.read(name))
+    return result
 
+def plot(byte_io):
+    Image.open(byte_io).show()
 
 if __name__ == "__main__":
     broken, MD5 = prepare()
     data = repair(broken, MD5)
     answer = solve(data)
+    plot(answer)
     # speed
 
     # Hurry up, I'm missing the boat
