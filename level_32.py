@@ -90,15 +90,15 @@ def parse(text):
     i_hor = next(i for i, line in enumerate(lines) if i > i_dim and line.startswith('# Horizontal'))
     i_ver = next(i for i, line in enumerate(lines) if i > i_hor and line.startswith('# Vertical'))
     # Parse rows and columns
-    r, c = map(int, lines[i_dim + 1].split())
+    rows, cols = map(int, lines[i_dim + 1].split())
     # Extract horizontal and vertical constraints
     row_clues = [list(map(int, line.split())) for line in lines[i_hor + 1:i_ver]]
     col_clues = [list(map(int, line.split())) for line in lines[i_ver + 1:]]
-    return r, c, row_clues, col_clues
+    return rows, cols, row_clues, col_clues
 
 
-def solve(r_num, c_num):
-    print_nonogram(solve_nonogram(r_num, c_num))
+def solve(row_clues, col_clues):
+    print_nonogram(solve_nonogram(row_clues, col_clues))
     # See an up arrow
 
     url = PREFIX + 'up.html'
@@ -107,8 +107,8 @@ def solve(r_num, c_num):
     url2 = PREFIX + catch(requests.get(url).text)
     # http://kohsamui:thailand@www.pythonchallenge.com/pc/rock/up.txt"
 
-    r, c, r_num, c_num = parse(requests.get(url2).text)
-    print_nonogram(solve_nonogram(r_num, c_num))
+    rows, cols, row_clues, col_clues = parse(requests.get(url2).text)
+    print_nonogram(solve_nonogram(row_clues, col_clues))
     # See a python
 
     url3 = PREFIX + 'python.html'
@@ -119,8 +119,8 @@ def solve(r_num, c_num):
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.text
-    r, c, r_num, c_num = parse(something)
-    answer = solve(r_num, c_num)
+    rows, cols, row_clues, col_clues = parse(something)
+    answer = solve(row_clues, col_clues)
     print(answer)
     # "Free" as in "Free speech", not as in "free...
     # Google this sentence and the answer is beer

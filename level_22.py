@@ -28,13 +28,17 @@ def solve(something):
         if dx == dy == 0:
             cx += 25
             cy = 100
-    unknown.show()
+    return unknown
+
+def plot(im):
+    im.show()
 
 
 if __name__ == "__main__":
     r = requests.get(url)
     something = r.content
     answer = solve(something)
+    plot(answer)
     # bonus
 
     # http://butter:fly@www.pythonchallenge.com/pc/hex/bonus.html
